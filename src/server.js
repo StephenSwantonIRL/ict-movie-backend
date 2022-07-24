@@ -65,15 +65,6 @@ async function init() {
     verifyOptions: { algorithms: ["HS256"] },
   });
 
-  const bellAuthOptions = {
-    provider: "github",
-    password: process.env.cookie_password,
-    clientId: process.env.githubclientid,
-    clientSecret: process.env.githubclientsecret,
-    location: process.env.domain,
-    isSecure: false
-  };
-  server.auth.strategy("github-oauth", "bell", bellAuthOptions);
 
   server.auth.default("jwt");
 
