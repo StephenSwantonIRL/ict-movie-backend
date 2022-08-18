@@ -4,7 +4,11 @@ const { Schema } = Mongoose;
 
 const movieSchema = new Schema({
   title: String,
-  revokedAt: { type: Date, default: Date.now },
+  genre: String,
+  plot: String,
+  releaseDate:  { type: Date },
+  cast: 
+  
 });
 
-export const Token = Mongoose.model("Token", tokenSchema);
+export const Movie = Mongoose.model("Movie", movieSchema);
