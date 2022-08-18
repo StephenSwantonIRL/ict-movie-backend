@@ -8,7 +8,7 @@ import {MongoStore} from "../src/models/mongo/stores.js";
 
 const saltRounds = 10;
 
-export const userApi = {
+export const movieApi = {
   find: {
     auth: {
       strategy: "jwt",
@@ -72,25 +72,24 @@ export const userApi = {
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function(request, h) {
       try {
-        const userDetails = request.payload;
-        userDetails.password = await bcrypt.hash(userDetails.password, saltRounds);
-        const user = await MongoStore.addOne(userDetails,"User");
-        if (user) {
-          return h.response(user).code(201);
+        const movieDetails = request.payload;
+        const movie = await MongoStore.addOne(movieDetails,"Movie");
+        if (movie) {
+          return h.response(movie).code(201);
         }
-        return Boom.badImplementation("error creating user");
+        return Boom.badImplementation("error creating movie");
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
     },
     tags: ["api"],
-    description: "Create a new User",
-    notes: "Adds a new user to the database.",
-    validate: { payload: UserSpec, failAction: validationError },
-    response: { schema: UserSpecPlus, failAction: validationError },
+    description: "Create a new Movie",
+    notes: "Adds a new movie to the database.",
   },
 
   deleteAll: {

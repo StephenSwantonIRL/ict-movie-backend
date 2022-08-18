@@ -1,4 +1,5 @@
 import { userApi } from "../api/user-api.js"
+import { movieApi } from "../api/fantasy-movie-api.js"
 
 export const apiRoutes = [
   { method: "GET", path: "/api/users", config: userApi.find },
@@ -9,4 +10,6 @@ export const apiRoutes = [
   { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
   { method: "POST", path: "/api/revokeToken", config: userApi.revokeToken },
   { method: ["GET", "POST","DELETE"], path: "/api/checkToken", config: userApi.checkToken },
+  
+  { method: "POST", path: "/api/movies", config: movieApi.create },
 ];
