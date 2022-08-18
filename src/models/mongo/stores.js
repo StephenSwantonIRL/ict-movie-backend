@@ -3,12 +3,15 @@ import _ from "lodash";
 // import all mongo schemas
 import { User } from "./user.js";
 import { Token } from "./revokedToken.js";
+import { Movie, Actor } from "./fantasy-movie.js"
 //
 
 const stores = new Map();
 
 stores.set("User", User )
 stores.set("Token", Token)
+stores.set("Movie", Movie )
+stores.set("Actor", Actor)
 
 function selectStore(Store){
   return stores.get(Store);

@@ -110,53 +110,6 @@ export const userApi = {
     notes: "Deletes all users from the database.",
   },
 
-  authenticate: {
-    auth: false,
-    handler: async function(request, h) {
-      try {
-        const user = await MongoStore.getByProperty(request.payload.email, "email", "User");
-        if (user) {
-          const passwordsMatch = await bcrypt.compare(request.payload.password, user.password);
-          if (passwordsMatch) {
-            const token = createToken(user);
-            return h.response({ success: true, token: token }).code(201);
-          }
-          return Boom.unauthorized("Invalid password");
-        }
-        return Boom.unauthorized("User not found");
-
-      } catch (err) {
-        return Boom.serverUnavailable("Database Error");
-      }
-    },
-    tags: ["api"],
-    description: "Authenticate a User",
-    notes: "If user has valid email/password, create and return a JWT token",
-    validate: { payload: UserCredentialsSpec, failAction: validationError },
-    response: { schema: JwtAuth, failAction: validationError },
-  },
-
-  revokeToken: {
-    auth: {
-      strategy: "jwt",
-    },
-    handler: async function(request, h) {
-      const response = await MongoStore.addOne({ token: request.auth.artifacts.token }, "Token");
-      if (response) {
-        return h.response(response).code(201);
-      }
-      return Boom.badImplementation("error revoking token");
-    },
-  },
-
-  checkToken: {
-    auth: {
-      strategy: "jwt",
-    },
-    handler: async function(request, h) {
-      return h.response("ok").code(200);
-    },
-  },
 
 
 };
