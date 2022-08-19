@@ -8,9 +8,9 @@ const movieSchema = new Schema({
   plot: String,
   releaseDate:  { type: Date },
   cast:  [{
-    type: Schema.Types.ObjectId,
-    ref: "Actor",
-  }],
+      name: String,
+      role: String 
+     }],
   
 });
 

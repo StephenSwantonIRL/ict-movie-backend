@@ -72,9 +72,7 @@ export const movieApi = {
   },
 
   create: {
-    auth: {
-      strategy: "jwt",
-    },
+    auth: false,
     handler: async function(request, h) {
       try {
         const movieDetails = request.payload;
