@@ -8,6 +8,7 @@ const movieSchema = new Schema({
   plot: String,
   releaseDate:  { type: Date },
   cast:  [{
+      id: String,
       name: String,
       role: String 
      }],
