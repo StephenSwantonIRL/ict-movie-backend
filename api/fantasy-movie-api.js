@@ -35,6 +35,21 @@ export const movieApi = {
       }
     },
   },
+  
+  findOneByUser: {
+    auth: false,
+    handler: async function(request, h) {
+      try {
+        const user = await MongoStore.getByProperty(request.params.id,"createdBy", "Movie");
+        if (!user) {
+          return Boom.notFound("No Movies for this user");
+        }
+        return user;
+      } catch (err) {
+        return Boom.serverUnavailable("No Movies for this user");
+      }
+    },
+  },
 
 
   create: {
