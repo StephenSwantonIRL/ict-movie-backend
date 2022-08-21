@@ -5,6 +5,7 @@ import { createToken } from "./jwt-utils.js";
 import { UserArray, UserSpec, UserCredentialsSpec, UserSpecPlus, IdSpec, JwtAuth } from "../src/models/joi-schemas.js";
 import { validationError } from "./logger.js";
 import {MongoStore} from "../src/models/mongo/stores.js";
+import mongoose from "mongoose"
 
 const saltRounds = 10;
 

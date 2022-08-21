@@ -38,8 +38,9 @@ export const MongoStore = {
 
     const Store = selectStore(store);
     const operation = new Store(object);
-    console.log(operation)
-    await operation.save();
+
+    let x = await operation.save();
+    console.log(x)
     const newObject =  await this.getByProperty(operation._id, "_id", store);
     return newObject;
   },
