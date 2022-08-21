@@ -56,7 +56,8 @@ export const movieApi = {
     auth: false,
     handler: async function(request, h) {
       try {
-        const movieDetails = request.payload;
+        let movieDetails = request.payload;
+        movieDetails.createdBy = mongoose.Types.ObjectId(request.payload.createdBy)
         const movie = await MongoStore.addOne(movieDetails,"Movie");
         if (movie) {
           return h.response(movie).code(201);
