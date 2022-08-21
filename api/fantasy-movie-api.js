@@ -58,14 +58,14 @@ export const movieApi = {
     handler: async function(request, h) {
       try {
         let movieDetails = request.payload;
-        movieDetails.createdBy = mongoose.Types.ObjectId(request.payload.createdBy)
+        console.log(movieDetails)
         const movie = await MongoStore.addOne(movieDetails,"Movie");
         if (movie) {
           return h.response(movie).code(201);
         }
         return Boom.badImplementation("error creating movie");
       } catch (err) {
-        return Boom.serverUnavailable("Database Error");
+        return Boom.serverUnavailable(err);
       }
     },
     tags: ["api"],

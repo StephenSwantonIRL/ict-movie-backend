@@ -12,10 +12,7 @@ const movieSchema = new Schema({
       name: String,
       role: String 
      }],
-  createdBy: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
+  createdBy: String
   
 });
 
