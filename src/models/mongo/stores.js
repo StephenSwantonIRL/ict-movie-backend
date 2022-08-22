@@ -128,4 +128,13 @@ export const MongoStore = {
     const Store = selectStore(store);
     await Store.deleteMany({});
   },
+  
+  async getAllByProperty(value, property, store) {
+    if (value) {
+      const Store = selectStore(store);
+      const result = await Store.find({ [property]: value }).lean();
+      return result;
+    }
+    return null;
+  },
 };

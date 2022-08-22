@@ -41,7 +41,8 @@ export const movieApi = {
     auth: false,
     handler: async function(request, h) {
       try {
-        const user = await MongoStore.getByProperty(request.params.id,"createdBy", "Movie");
+        const user = await MongoStore.getAllByProperty(request.params.id,"createdBy", "Movie");
+        console.log(user)
         if (!user) {
           return Boom.notFound("No Movies for this user");
         }
